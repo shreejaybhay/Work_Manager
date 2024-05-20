@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
@@ -9,9 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({ email: '', password: '' });
 
-
     const handleSubmit = async (e) => {
-
         e.preventDefault();
         let validationErrors = {};
         if (!email) {

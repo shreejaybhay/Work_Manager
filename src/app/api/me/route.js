@@ -2,8 +2,10 @@ import { NextResponse } from 'next/server';
 import { User } from '@/models/users';
 import jwt from 'jsonwebtoken';
 import { connectDB } from '@/helper/db';
+
 // Define a function to handle GET requests
 export async function GET(request) {
+
     connectDB()
     // Retrieve the authToken from the request cookies
     const authToken = request.cookies.get("authToken")?.value;

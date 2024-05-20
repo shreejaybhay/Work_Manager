@@ -24,9 +24,6 @@ const Profile = () => {
         fetchUserData();
     }, [router]);
 
-
-    
-
     async function doLogout() {
 
         try {

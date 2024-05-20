@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/helper/db'; // Ensure correct file path
+import { connectDB } from './helper/db';
 
 export async function middleware(request) {
     console.log("Middleware executed");

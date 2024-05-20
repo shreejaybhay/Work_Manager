@@ -1,6 +1,6 @@
 "use client"
 import axios from 'axios';
-import { deleteTask, getTasksOfUser, statusUpdate, updateTask } from '@/services/taskService';
+import { deleteTask, getTasksOfUser } from '@/services/taskService';
 import React, { useEffect, useState } from 'react';
 import LoadingSkeleton from './loading';
 import Link from 'next/link';

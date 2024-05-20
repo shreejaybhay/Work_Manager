@@ -1,50 +1,30 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { connectDB } from '@/helper/db'; // Ensure correct file path
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request) {
-    console.log("middleware executed");
+export async function middleware(request) {
+    console.log("Middleware executed");
+
+    await connectDB(); // Ensure correct function call syntax
 
     const authToken = request.cookies.get("authToken")?.value;
+    const { pathname } = request.nextUrl;
 
-    const loggedInUserNotAccessPaths =
-        request.nextUrl.pathname === "/login" ||
-        request.nextUrl.pathname == "/signup" ||
-        request.nextUrl.pathname === "/api/users" ||
-        request.nextUrl.pathname === "/api/login";
+    const isPublicRoute = ["/login", "/signup"].includes(pathname);
+    const isProtectedRoute = ["/addtask", "/showtask", "/profile"].includes(pathname);
 
-    if (loggedInUserNotAccessPaths) {
-        // access not secured route
-        if (authToken) {
-            return NextResponse.redirect(new URL("/profile", request.url));
-        }
-    } else {
-        // accessing secured route
-
-        if (!authToken) {
-            if (request.nextUrl.pathname.startsWith("/api")) {
-                return NextResponse.json(
-                    {
-                        message: "Access Denied !!",
-                        success: false,
-                    },
-                    {
-                        status: 401,
-                    }
-                );
-            }
-
-            return NextResponse.redirect(new URL("/login", request.url));
-        } else {
-            // varify...
-        }
+    if (isPublicRoute && authToken) {
+        // Authenticated users should not access login or signup pages
+        return NextResponse.redirect(new URL("/profile", request.url));
     }
 
-    console.log(authToken);
+    if (isProtectedRoute && !authToken) {
+        // Unauthenticated users should not access protected routes
+        return NextResponse.redirect(new URL("/login", request.url));
+    }
 
-    //   return NextResponse.redirect(new URL("/home", request.url));
+    return NextResponse.next();
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
     matcher: [
         "/login",
@@ -52,6 +32,5 @@ export const config = {
         "/addtask",
         "/showtask",
         "/profile",
-        "/api/:path*",
     ],
 };

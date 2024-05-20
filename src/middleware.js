@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from './helper/db';
+import { connectDB } from '@/helper/db'; // Ensure correct file path
 
 export async function middleware(request) {
     console.log("Middleware executed");
-    const dbConnection = await connectDB();
+
+    await connectDB(); // Ensure correct function call syntax
+
     const authToken = request.cookies.get("authToken")?.value;
     const { pathname } = request.nextUrl;
 

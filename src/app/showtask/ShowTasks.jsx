@@ -58,7 +58,6 @@ const ShowTasks = () => {
                                         <span className={`px-2 py-1 text-sm rounded ${task.status === 'Pending' ? 'bg-yellow-400 text-yellow-900' : 'bg-green-400 text-green-900'}`}>{task.status}</span>
                                     </div>
                                     <div>
-                                        <Link href={`/edittopic/${task._id}`} className="px-4 py-2 mr-2 text-sm font-semibold transition duration-300 bg-blue-400 rounded hover:bg-blue-300 hover:text-blue-800">Edit</Link>
                                         <button onClick={() => handleDelete(task._id)} className="px-4 py-2 text-sm font-semibold transition duration-300 bg-red-400 rounded hover:bg-red-300 hover:text-red-800">Delete</button>
                                     </div>
                                 </div>

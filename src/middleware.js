@@ -3,9 +3,7 @@ import { connectDB } from './helper/db';
 
 export async function middleware(request) {
     console.log("Middleware executed");
-
-    await connectDB(); // Ensure correct function call syntax
-
+    const dbConnection = await connectDB();
     const authToken = request.cookies.get("authToken")?.value;
     const { pathname } = request.nextUrl;
 

@@ -1,12 +1,8 @@
 "use client"
-import { logout } from '@/services/userService';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+
 
 const Header = () => {
-    const router = useRouter();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const toggleMobileMenu = () => {
